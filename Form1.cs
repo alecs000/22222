@@ -41,16 +41,16 @@ namespace ASS
             int max = 270;
             
             int num = r.Next(0, 750);
-            PictureBox picBull = new PictureBox();
-            b.ShowMyImage(picBull, @"y.png", 20, 20, num);
-            panel1.Controls.Add(picBull);
+            PictureBox picAster = new PictureBox();
+            b.ShowMyImage(picAster, @"y.png", 20, 20, num);
+            panel1.Controls.Add(picAster);
             timer.Tick += new EventHandler((o1, ev1) =>
             {
                 count++;
-                picBull.Location = new Point(picBull.Location.X, picBull.Location.Y + 2);
+                picAster.Location = new Point(picAster.Location.X, picAster.Location.Y + 2);
                 if (count == max)
                 {
-                    picBull.Dispose();
+                    picAster.Dispose();
                     timer.Stop();
 
                 }
