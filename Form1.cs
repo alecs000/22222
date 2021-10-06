@@ -16,9 +16,9 @@ namespace ASS
         {
             InitializeComponent();
         }
-        Bullets b = new Bullets();
+        Asteroid b = new Asteroid();
 
-
+        Random r = new Random();
         int i = 0;
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -29,6 +29,7 @@ namespace ASS
             Timer1.Enabled = true;
             Timer1.Tick += new EventHandler(Timer1_Tick);
         }
+
         private void Timer1_Tick(object Sender, EventArgs o)
         {
 
@@ -37,10 +38,11 @@ namespace ASS
             timer.Interval = 10;
 
             int count = 0;
-            int max = 300;
-
+            int max = 270;
+            
+            int num = r.Next(0, 750);
             PictureBox picBull = new PictureBox();
-            b.ShowMyImage(picBull, @"y.png", 20, 20);
+            b.ShowMyImage(picBull, @"y.png", 20, 20, num);
             panel1.Controls.Add(picBull);
             timer.Tick += new EventHandler((o1, ev1) =>
             {
@@ -48,6 +50,7 @@ namespace ASS
                 picBull.Location = new Point(picBull.Location.X, picBull.Location.Y + 2);
                 if (count == max)
                 {
+                    picBull.Dispose();
                     timer.Stop();
 
                 }
@@ -61,14 +64,14 @@ namespace ASS
     }
 
 
-    class Bullets
+    class Asteroid
     {
 
-        private int i = 0;
+        int i = 0;
         private Bitmap MyImage;
-        public PictureBox ShowMyImage(PictureBox bulletBox, String fileToDisplay, int xSize, int ySize)
+        public PictureBox ShowMyImage(PictureBox bulletBox, String fileToDisplay, int xSize, int ySize, int ran)
         {
-            Random r = new Random();
+            
             // Sets up an image object to be displayed.
             if (MyImage != null)
             {
@@ -82,7 +85,7 @@ namespace ASS
             MyImage = new Bitmap(fileToDisplay);
             bulletBox.ClientSize = new Size(xSize, ySize); //Размер пуль
             bulletBox.Image = (Image)MyImage;
-            bulletBox.Location = new Point(r.Next(0, 750), 0);//Начальное положение Пуль
+            bulletBox.Location = new Point(ran, 0);//Начальное положение Пуль
             return bulletBox;
         }
 
